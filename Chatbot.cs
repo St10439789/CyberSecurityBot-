@@ -1,13 +1,15 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Management.Instrumentation;
+using System.Runtime.Remoting.Lifetime;
 
 namespace CyberSecurityBot_
 {
     internal class Chatbot
     {
+        ConsoleTypeEffect consoleType = new ConsoleTypeEffect();
 
         // Instance of SoundManager and UIManager to handle tasks
         private SoundManager _soundManager;
@@ -45,7 +47,8 @@ namespace CyberSecurityBot_
 
             // Prompt for the user's name and display the prompt in green
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\nPlease enter your name: ");
+            consoleType.typyingeffect("\nPlease enter your name: ");
+            
             Console.ResetColor();
 
             // Getting the user's name as input
@@ -53,7 +56,7 @@ namespace CyberSecurityBot_
 
             // Display a personalized welcome message in yellow
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine($"\nHello, {userName}! Welcome to the Cybersecurity Awareness Bot.");
+            consoleType.typyingeffect($"\nHello, {userName}! Welcome to the Cybersecurity Awareness Bot.");
             Console.ResetColor();
         }
 
@@ -63,16 +66,16 @@ namespace CyberSecurityBot_
             
             // Inform the user to ask something about cybersecurity
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("\n I am here to help you stay safe online, kindly confirm your name to get started");
+            consoleType.typyingeffect("\n I am here to help you stay safe online, kindly confirm your name to get started");
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("Your Name: ");
+            consoleType.typyingeffect("Your Name: ");
 
             string userName = Console.ReadLine();
 
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("Hello " + userName + ", I am here to help you stay safe online. Ask me something about cybersecurity!");
+            consoleType.typyingeffect("Hello " + userName + ", I am here to help you stay safe online. Ask me something about cybersecurity!");
             Console.ResetColor();
             string userQuestion;
             // Create an ArrayList to hold questions and responses
@@ -101,14 +104,14 @@ namespace CyberSecurityBot_
                 if (string.IsNullOrWhiteSpace(userQuestion))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("I didn't quite understand that. Could you rephrase?");
+                    consoleType.typyingeffect("I didn't quite understand that. Could you rephrase?");
                     Console.ResetColor();
                 }
                 else if (userQuestion.Contains("exit") || userQuestion.Contains("goodbye"))
                 {
                     // Farewell message with a green color
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Goodbye! Thank you for your time today, take care and see you soon. Stay safe online!");
+                    consoleType.typyingeffect("Goodbye! Thank you for your time today, take care and see you soon. Stay safe online!");
                     Console.ResetColor();
                     break; // Exit the loop after displaying the message
                 }
@@ -135,7 +138,7 @@ namespace CyberSecurityBot_
                         if (!found)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Sorry, I didn't quite understand that. Could you rephrase?");
+                            consoleType.typyingeffect("Sorry, I didn't quite understand that. Could you rephrase?");
                             Console.ResetColor();
                         }
                     }
@@ -154,7 +157,7 @@ namespace CyberSecurityBot_
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Sorry, I couldn't find any answers for your questions.");
+                        consoleType.typyingeffect("Sorry, I couldn't find any answers for your questions.");
                         Console.ResetColor();
                     }
                     Console.WriteLine(); // Add an empty line after bot response
